@@ -4,11 +4,24 @@
 import { typeHomeA } from "@/types";
 import Image from "next/image";
 import ButtonA from "../widgets/button/ButtonA";
+import { useEffect, useRef } from "react";
+import { useInView } from "framer-motion";
 
-const Home_006 = ({className = ''}: typeHomeA) => {
+const Home_006 = ({id = '', name = '', className = '', onView = () => {}}: typeHomeA) => {
+
+    const localRef = useRef(null);
+    const isInView = useInView(localRef);
+
+    useEffect(() => {
+        if(isInView){
+            onView({
+                name: name
+            })
+        }
+    }, [isInView])
   
     return (
-        <div className={`${className} relative pt-[80px]`}>
+        <div ref={localRef} id={id} className={`${className} relative pt-[80px]`}>
             <div className="absolute left-0 top-0 w-[44%] h-[80px] set_bg" style={{backgroundImage: 'url(/images/noises/noise_006.png)'}}></div>
             <div className="relative bg-colBlueA px-20 pt-10">
                 <Image data-aos="fade-down" data-aos-duration="1500" className="absolute left-[50%] top-[-60px] w-[10px] h-[150px] m-auto object-contain translate-x-[-50%]" src="/images/sketches/sketch_007.png" width={0} height={0} sizes="100vw" alt=""/>

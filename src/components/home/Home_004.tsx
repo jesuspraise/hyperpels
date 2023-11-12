@@ -2,12 +2,25 @@
 'use client';
 
 import { typeHomeA } from "@/types";
+import { useInView } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
-const Home_004 = ({className = ''}: typeHomeA) => {
+const Home_004 = ({id = '', name = '', className = '', onView = () => {}}: typeHomeA) => {
+
+    const localRef = useRef(null);
+    const isInView = useInView(localRef);
+
+    useEffect(() => {
+        if(isInView){
+            onView({
+                name: name
+            })
+        }
+    }, [isInView])
   
     return (
-        <div className={`${className} relative pt-12 bg-colBlueA px-20 pb-28`}>
+        <div ref={localRef} id={id} className={`${className} relative pt-12 bg-colBlueA px-20 pb-28`}>
             <div className="absolute left-0 top-0 w-[44%] h-[260px] set_bg" style={{backgroundImage: 'url(/images/noises/noise_004.png)'}}></div>
             <Image data-aos="fade-right" data-aos-duration="1500" className="absolute left-0 top-[-20px] w-[88px] h-[180px] m-auto object-cover" src="/images/sketches/sketch_005.png" width={0} height={0} sizes="100vw" alt=""/>
             <Image data-aos="fade-left" data-aos-duration="1500" className="absolute right-0 top-[-80px] w-[108px] h-[240px] m-auto object-cover" src="/images/sketches/sketch_006.png" width={0} height={0} sizes="100vw" alt=""/>

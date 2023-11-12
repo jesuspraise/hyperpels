@@ -4,5 +4,8 @@ export interface typeButtonA {
     children: any;
 }
 export interface typeHomeA {
+    id?: string;
+    name?: string;
     className?: string;
+    onView?: any;
 }

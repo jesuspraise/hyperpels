@@ -16,17 +16,26 @@ const config: Config = {
       colors: {
         colPinkA: '#fbf6de',
         colPinkB: '#fbe8de',
-        colBlueA: '#e1edf4'
+        colBlueA: '#e1edf4',
+        colOrangeA: '#ea552b',
+        colYellowA: '#fdd900'
       },
       fontFamily: {
         familyA: 'Grifter',
-        familyB: 'PlusJakartaSans'
+        familyB: 'PlusJakartaSans',
+        familyC: 'Inconsolata'
       },
       fontSize: {
         small: '0.8rem',
         smaller: '0.7rem',
         smallest: '0.6rem'
       },
+      // keyframes: {
+      //   frameA: {
+      //     '0%, 100%': { opacity: '0' },
+      //     '50%': { opacity: '1' },
+      //   }
+      // },
       screens: {
         sm: '480px',
         md: '800px',

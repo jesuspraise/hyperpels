@@ -3,15 +3,18 @@
 
 import { typeHomeA } from "@/types";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
-const Home_002 = ({className = ''}: typeHomeA) => {
+const Home_002 = ({id = '', name = '', className = '', onView = () => {}}: typeHomeA) => {
 
     const [states, setStates] = useState<any>({
         affils: []
     });
+
+    const localRef = useRef(null);
+    const isInView = useInView(localRef);
 
     useEffect(() => {
         setStates({
@@ -27,6 +30,13 @@ const Home_002 = ({className = ''}: typeHomeA) => {
             ]
         });
     }, []);
+    useEffect(() => {
+        if(isInView){
+            onView({
+                name: name
+            })
+        }
+    }, [isInView])
 
     const sliderVariants: any = {
         initial: {
@@ -50,7 +60,7 @@ const Home_002 = ({className = ''}: typeHomeA) => {
                             {
                                 states.affils.map((affil: any, a: number) => {
                                     return (
-                                        <div key={a} className="mx-3 transitionA hover:shadow-[0_30px_40px_#a88f83] hover:scale-[1.1]">
+                                        <div key={a} className="mx-3">
                                             <Image
                                                 className="w-full h-full object-cover"
                                                 src={`/images/affils/${affil.name}`}
@@ -66,7 +76,7 @@ const Home_002 = ({className = ''}: typeHomeA) => {
                         </motion.div>;
   
     return (
-        <div className={`${className} relative whitespace-nowrap hide_scrollbar bg-black py-8 flex items-center overflow-hidden`}>
+        <div ref={localRef} id={id} className={`${className} relative whitespace-nowrap hide_scrollbar bg-black py-8 flex items-center overflow-hidden`}>
             {motionDiv}
             {motionDiv}
         </div>

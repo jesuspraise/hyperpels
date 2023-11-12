@@ -4,12 +4,17 @@
 
 @font-face {
 	font-family: 'Grifter';
-	src: url(../../public/fonts//Grifter/grifter.otf);
+	src: url(../../public/fonts/Grifter/grifter.otf);
 	font-weight: normal;
 }
 @font-face {
 	font-family: 'PlusJakartaSans';
-	src: url(../../public/fonts//Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf);
+	src: url(../../public/fonts/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf);
+	font-weight: normal;
+}
+@font-face {
+	font-family: 'Inconsolata';
+	src: url(../../public/fonts/Inconsolata/Inconsolata-VariableFont_wdth\,wght.ttf);
 	font-weight: normal;
 }
 
@@ -40,3 +45,13 @@ html {
 .transitionB {
 	transition: all linear 0.1s;
 }
+.transitionC {
+	transition: all linear 2s;
+}
+
+
+/* .animationA {
+  animation: showbtn ease linear 1 1s;
+  animation-delay: 3s;
+} */
+/* @keyframes {} */

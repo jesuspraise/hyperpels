@@ -1,15 +1,17 @@
 
 'use client';
 
-import { appImageUrl } from "@/def";
 import { typeHomeA } from "@/types";
 import Image from "next/image";
 import ButtonA from "../widgets/button/ButtonA";
 import { useEffect, useRef, useState } from "react";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
-const Home_001 = ({className = ''}: typeHomeA) => {
+const Home_001 = ({id = '', name = '', className = '', onView = () => {}}: typeHomeA) => {
+
+    const localRef = useRef(null);
+    const isInView = useInView(localRef);
 
     const [states, setStates] = useState<any>({
         projects: []
@@ -26,6 +28,19 @@ const Home_001 = ({className = ''}: typeHomeA) => {
             ]
         });
     }, []);
+    useEffect(() => {
+        if(isInView){
+            onView({
+                name: name
+            })
+        }
+    }, [isInView])
+
+    const gearRef: any = useRef();
+    const {scrollYProgress: gearProgress} = useScroll({
+        target: gearRef
+    });
+    const rotateVal:any = useTransform(gearProgress, [0,1], ['15deg', '-15deg']);
 
     const projectsRef: any = useRef();
     const {scrollYProgress} = useScroll({
@@ -34,13 +49,13 @@ const Home_001 = ({className = ''}: typeHomeA) => {
     const transX:any = useTransform(scrollYProgress, [0,1], ['-30%', '0%']);
   
     return (
-        <div className={`relative ${className} bg-colPinkA overflow-hidden`}>
+        <div ref={localRef} id={id} className={`relative ${className} bg-colPinkA overflow-hidden`}>
             <div className="absolute left-0 top-0 w-[44%] h-[360px] set_bg" style={{backgroundImage: 'url(/images/noises/noise_001.png)'}}></div>
             <div className="relative pt-6 pb-14">
                 <div className="mb-10">
                     <div>
                         <div className="mb-20 m-auto w-[140px] h-[56px]">
-                            <Image className="w-full h-full object-cover" src={appImageUrl} width={0} height={0} sizes="100vw" alt="hyper"/>
+                            <Image className="w-full h-full object-cover" src="/icons/icon_001.png" width={0} height={0} sizes="100vw" alt="hyper"/>
                         </div>
                     </div>
                     <div className="relative overflow-hidden">
@@ -94,7 +109,13 @@ const Home_001 = ({className = ''}: typeHomeA) => {
                             })
                         }
                     </motion.div>
-                    <Image className="absolute left-[96px] top-[19px] w-[130px] h-[120px] object-cover" src="/images/sketches/sketch_002.png" width={0} height={0} sizes="100vw" alt=""/>
+                    <motion.div
+                        className="absolute left-[96px] top-[19px] w-[130px] h-[120px]"
+                        ref={gearRef}
+                        style={{rotate: rotateVal}}
+                    >
+                        <Image className="w-full h-full object-cover rotate-[-30deg]" src="/images/sketches/sketch_002.png" width={0} height={0} sizes="100vw" alt=""/>
+                    </motion.div>
                 </div>
             </div>
         </div>

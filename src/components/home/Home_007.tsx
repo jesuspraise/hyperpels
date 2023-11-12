@@ -2,9 +2,22 @@
 'use client';
 
 import { typeHomeA } from "@/types";
+import { useInView } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
-const Home_007 = ({className = ''}: typeHomeA) => {
+const Home_007 = ({id = '', name = '', className = '', onView = () => {}}: typeHomeA) => {
+
+    const localRef = useRef(null);
+    const isInView = useInView(localRef);
+
+    useEffect(() => {
+        if(isInView){
+            onView({
+                name: name
+            })
+        }
+    }, [isInView])
 
     const things = [
         'Websites', 'Slide decks', 'Trade show banners', 'Mobile apps', 'Stage Backdrops', 'Email graphics',
@@ -14,9 +27,9 @@ const Home_007 = ({className = ''}: typeHomeA) => {
     ];
   
     return (
-        <div className={`${className} relative`}>
+        <div ref={localRef} id={id} className={`${className} relative`}>
             <div className="absolute left-0 top-0 w-[44%] h-[480px] set_bg" style={{backgroundImage: 'url(/images/noises/noise_006.png)'}}></div>
-            <div className="relative px-20 pt-28 pb-20">
+            <div className="relative px-20 pt-28 pb-36">
                 <Image data-aos="fade-down" data-aos-duration="1500" className="absolute left-[50%] top-[-90px] w-[10px] h-[150px] m-auto object-contain translate-x-[-50%]" src="/images/sketches/sketch_009.png" width={0} height={0} sizes="100vw" alt=""/>
                 <div data-aos="fade-up" data-aos-duration="1500">
                     <div className="mb-32 text-center font-familyA font-semibold leading-tight tracking-wide text-5xl">
