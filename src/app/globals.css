@@ -2,26 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@font-face {
+	font-family: 'Grifter';
+	src: url(../../public/fonts//Grifter/grifter.otf);
+	font-weight: normal;
+}
+@font-face {
+	font-family: 'PlusJakartaSans';
+	src: url(../../public/fonts//Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf);
+	font-weight: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+html {
+  font-family: 'PlusJakartaSans';
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+.hide_scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide_scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.set_bg {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
+  
+.transitionA {
+	transition: all ease 0.25s;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.transitionB {
+	transition: all linear 0.1s;
 }
